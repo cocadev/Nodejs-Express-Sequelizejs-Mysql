@@ -1,43 +1,134 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
- 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Home</a></li>
-      <li><a href="/about">JSA</a></li>
-    </ul>
-  </div>
-</nav>
-  
-<div class="jumbotron text-center">
-  <h1>JSA NodeJS/Express Bootstrap Page</h1>
-  <p>This is a responsive page! You can resize the page to see affect!</p> 
-</div>
-  
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6">
-      <h3>Express</h3>
-      <p>JSA uses Express framework and Bootstrap to build a demo web application.</p>
-      <p>Express.js is a web application framework for Node.js, it is free and open-source software under the MIT License.</p>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/about">JSA</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="col-sm-4">
+            <h3>NodeJS/Express Post/Get Ajax</h3>
+            <div>
+                <form id="customerForm">
+                    <div class="form-group">
+                        <label for="firstname">FirstName:</label>
+                        <input type="text" class="form-control" id="firstname" placeholder="Enter FirstName" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">LastName:</label>
+                        <input type="text" class="form-control" id="lastname" placeholder="Enter LastName" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="text" class="form-control" id="age" placeholder="Enter Age" required/>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+            <div id="postResultDiv">
+            </div>
+            <br>
+            <div>
+                <button id="allCustomers" type="button" class="btn btn-default">Customers</button>
+                <div id="getResultDiv">
+                    <ul class="list-group">
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-6">
-      <h3>Bootstrap</h3>        
-      <p>Bootstrap is a free front-end framework for faster and easier web development</p>
-      <p>Bootstrap includes HTML and CSS based responsive design templates</p>
-    </div>
-  </div>
-</div>
- 
+
 </body>
+<script>
+    $(document).ready(function () {
+
+        $("#allCustomers").click(function (event) {
+            event.preventDefault();
+            ajaxGet();
+        });
+
+        $("#customerForm").submit(function (event) {
+            event.preventDefault();
+            ajaxPost();
+        });
+
+        function ajaxGet() {
+            $.ajax({
+                type: "GET",
+                url: window.location.origin + "/api/getAllCustomers",
+                success: function (result) {
+                    $('#getResultDiv ul').empty();
+                    var custList = "";
+                    $.each(result, function (i, customer) {
+                        $('#getResultDiv .list-group').append(customer.firstname + " " + customer.lastname + "<br>")
+                    });
+                    console.log("Success: ", result);
+                },
+                error: function (e) {
+                    $("#getResultDiv").html("<strong>Error</strong>");
+                    console.log("ERROR: ", e);
+                }
+            });
+        }
+
+        function ajaxPost() {
+
+            // PREPARE FORM DATA
+            var formData = {
+                firstname: $("#firstname").val(),
+                lastname: $("#lastname").val(),
+                age: $("#age").val(),
+            }
+
+            // DO POST
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: window.location.origin + "/api/addCustomer",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success: function (customer) {
+                    $("#postResultDiv").html("<p>" +
+                        "Post Successfully! <br>" +
+                        "--->" + JSON.stringify(customer) + "</p>");
+                },
+                error: function (e) {
+                    alert("Error!")
+                    console.log("ERROR: ", e);
+                }
+            });
+
+            // Reset FormData after Posting
+            resetData();
+
+        }
+
+        function resetData() {
+            $("#firstname").val("");
+            $("#lastname").val("");
+        }
+
+    })
+</script>
+
 </html>
