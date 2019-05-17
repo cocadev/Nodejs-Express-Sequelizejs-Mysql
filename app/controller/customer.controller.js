@@ -3,6 +3,9 @@ const excel = require('exceljs');
 const Json2csvParser = require('json2csv').Parser;
 
 const Customer = db.customers;
+const functions = require('../function.js');
+
+global.__basedir = __dirname;
 
 // Post a Customer
 exports.create = (req, res) => {
@@ -96,5 +99,14 @@ exports.jsoncsv = (req, res) => {
 		res.setHeader('Content-disposition', 'attachment; filename=customers.csv');
 		res.set('Content-Type', 'text/csv');
 		res.status(200).end(csvData);
+	});
+};
+
+
+// FETCH all Customers
+exports.uploadfile = (req, res) => {
+	functions.importExcelData2MySQL(__basedir + '../../../uploads/' + req.file.filename);
+  res.json({
+		'msg': 'File uploaded/import successfully!', 'file': req.file
 	});
 };
