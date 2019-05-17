@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.get('/api/getOneCustomer/:customerId', customers.findById);
     app.put('/api/updateCustomer/:customerId', customers.update);
     app.delete('/api/deleteCustomer/:customerId', customers.delete);
-    app.get('/api/downloadAllCustomers/excel', customers.download);
+    app.get('/api/downloadAllCustomers/excel', customers.excel);
+    app.get('/api/downloadAllCustomers/jsoncsv', customers.jsoncsv);
 
 }

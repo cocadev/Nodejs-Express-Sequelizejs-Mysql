@@ -1,5 +1,6 @@
 const db = require('../config/db.config.js');
 const excel = require('exceljs');
+const Json2csvParser = require('json2csv').Parser;
 
 const Customer = db.customers;
 
@@ -51,8 +52,8 @@ exports.delete = (req, res) => {
 	});
 };
 
-// FETCH all Customers
-exports.download = (req, res) => {
+// excel all Customers
+exports.excel = (req, res) => {
 	Customer.findAll().then(customers => {
 
 		const jsonCustomers = JSON.parse(JSON.stringify(customers));
@@ -77,5 +78,23 @@ exports.download = (req, res) => {
 			.then(function () {
 				res.status(200).end();
 			});
+	});
+};
+
+// jsoncsv all Customers
+exports.jsoncsv = (req, res) => {
+	Customer.findAll().then(customers => {
+
+		const jsonCustomers = JSON.parse(JSON.stringify(customers));
+
+		// -> Convert JSON to CSV data
+		const csvFields = ['id', 'firstname', 'lastname', 'age'];
+		const json2csvParser = new Json2csvParser({ csvFields });
+		const csvData = json2csvParser.parse(jsonCustomers);
+
+		// -> Send CSV File to Client
+		res.setHeader('Content-disposition', 'attachment; filename=customers.csv');
+		res.set('Content-Type', 'text/csv');
+		res.status(200).end(csvData);
 	});
 };
