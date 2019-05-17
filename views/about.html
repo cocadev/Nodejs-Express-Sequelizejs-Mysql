@@ -1,36 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>NodeJS/Express RestAPI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
- 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
-      <li class="active"><a href="/about">JSA</a></li>
-    </ul>
-  </div>
-</nav>
-  
-<div class="jumbotron text-center">
-  <h1>Who We Are</h1>
-  <p>
-  We are passionate engineers in software development by Java Technology & Spring Framework.
-  </p>
-  <p>
-  We focus on how to do things that can both respect users and make money. We exist because you come here to make us exist. We are into a cycle that continuously improves our site, and in the future, our community. We don’t treat our product processes like a short-term business.
-  </p>
-  <p>  
-  We are always here waiting for the voice from you.
-  If having any problem or idea, please do not hesitate to contact us via the page.
-  </p>
-</div>
+
+<body class="container">
+
+    <h1 style="text-decoration: underline; color:#283E84">1. Bootstrap Image - NodeJS/Express ResAPI</h1>
+    <div>
+        <div id="loadImageBootstrapStyleDiv">
+            <a href="/api/image">
+                <img src="/api/image" id="jsaAboutImageId" class="img-rounded img-responsive" alt="JSA-About Image" />
+                <div class="caption">
+                    <p>JSA-About Image</p>
+                </div>
+            </a>
+        </div>
+        <div class="btn-group">
+            <button id="roundedCornersBtn" type="button" class="btn btn-primary">Rounded Corners</button>
+            <button id="circleBtn" type="button" class="btn btn-primary">Circle</button>
+            <button id="thumbnailBtn" type="button" class="btn btn-primary">Thumbnail</button>
+        </div>
+    </div>
+    <h1 style="text-decoration: underline; color:#283E84">2. Bootstrap Image Gallery</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="/api/image">
+                    <img src="/api/image" class="img-rounded" alt="JSA-About img-rounded" style="width:100%" />
+                    <div class="caption">
+                        <p>JSA-About img-rounded</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="/api/image">
+                    <img src="/api/image" class="img-circle" alt="JSA-About img-circle" style="width:100%" />
+                    <div class="caption">
+                        <p>JSA-About img-circle</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="/api/image">
+                    <img src="/api/image" class="img-thumbnail" alt="JSA-About img-thumbnail" style="width:100%" />
+                    <div class="caption">
+                        <p>JSA-About img-thumbnail</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#roundedCornersBtn").on("click", function () {
+                $("#jsaAboutImageId").removeClass().addClass('img-rounded img-responsive');
+            });
+
+            $("#circleBtn").on("click", function () {
+                $("#jsaAboutImageId").removeClass().addClass('img-circle img-responsive');
+            });
+
+            $("#thumbnailBtn").on("click", function () {
+                $("#jsaAboutImageId").removeClass().addClass('img-thumbnail img-responsive');
+            });
+        })
+    </script>
+
 </body>
+
 </html>
