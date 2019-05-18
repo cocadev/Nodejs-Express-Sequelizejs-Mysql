@@ -48,6 +48,15 @@
             <div id="postResultDiv">
             </div>
             <br>
+            <div style="margin-bottom:20px; padding:10px; background-color:#336699; color:white;">
+                <p>Type some text to search the table for
+                    <strong>Id</strong>,
+                    <strong>Name</strong>,
+                    <strong>Age</strong>,
+                    <strong>Street</strong>,
+                    <strong>PostCode</strong>:</p>
+                <input class="form-control" id="inputFilter" type="text" placeholder="Search.." />
+            </div>
             <div>
                 <button id="allCustomers" type="button" class="btn btn-default">Customers</button>
                 <table id="customerTable" class="table table-bordered table-hover">
@@ -159,6 +168,14 @@
             $("#firstname").val("");
             $("#lastname").val("");
         }
+
+        // do Filter on View
+        $("#inputFilter").on("keyup", function () {
+            var inputValue = $(this).val().toLowerCase();
+            $("#customerTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(inputValue) > -1)
+            });
+        });
 
     })
 </script>
