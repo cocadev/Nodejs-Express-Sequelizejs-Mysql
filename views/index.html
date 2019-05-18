@@ -50,6 +50,20 @@
             <br>
             <div>
                 <button id="allCustomers" type="button" class="btn btn-default">Customers</button>
+                <table id="customerTable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Create Date</th>
+                            <th>Update Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
                 <div id="getResultDiv">
                     <ul class="list-group">
                     </ul>
@@ -76,13 +90,31 @@
             $.ajax({
                 type: "GET",
                 url: window.location.origin + "/api/getAllCustomers",
+                // success: function (result) {
+                //     $('#getResultDiv ul').empty();
+                //     var custList = "";
+                //     $.each(result, function (i, customer) {
+                //         $('#getResultDiv .list-group').append(customer.firstname + " " + customer.lastname + "<br>")
+                //     });
+                //     console.log("Success: ", result);
+                // },
                 success: function (result) {
-                    $('#getResultDiv ul').empty();
-                    var custList = "";
                     $.each(result, function (i, customer) {
-                        $('#getResultDiv .list-group').append(customer.firstname + " " + customer.lastname + "<br>")
+
+                        var customerRow = '<tr>' +
+                            '<td>' + customer.id + '</td>' +
+                            '<td>' + customer.firstname.toUpperCase() + '</td>' +
+                            '<td>' + customer.lastname + '</td>' +
+                            '<td>' + customer.age + '</td>' +
+                            '<td>' + customer.createdAt + '</td>' +
+                            '</tr>';
+
+                        $('#customerTable tbody').append(customerRow);
+
                     });
-                    console.log("Success: ", result);
+
+                    $("#customerTable tbody tr:odd").addClass("info");
+                    $("#customerTable tbody tr:even").addClass("success");
                 },
                 error: function (e) {
                     $("#getResultDiv").html("<strong>Error</strong>");
