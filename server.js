@@ -21,6 +21,7 @@ db.sequelize.sync({force: true}).then(() => {
 require('./app/route/customer.route.js')(app);
 require('./app/route/auth.route.js')(app);
 require('./app/route/company.route.js')(app);
+require('./app/route/project.route.js')(app);
 
 router.use(function (req,res,next) { console.log("/" + req.method); next();});
 
