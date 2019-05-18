@@ -3,6 +3,8 @@ const excel = require('exceljs');
 const Json2csvParser = require('json2csv').Parser;
 
 const Customer = db.customers;
+const Address = db.address;
+
 const functions = require('../function.js');
 
 global.__basedir = __dirname;
@@ -14,19 +16,33 @@ exports.create = (req, res) => {
 		firstname: req.body.firstname,
 		lastname: req.body.lastname,
 		age: req.body.age
-	}).then(customer => {
-		// Send created customer to client
-		res.send(customer);
+	}).then(createdCustomer => {
+		customer = createdCustomer;
+
+		return Address.create({
+			street: req.body.street,
+			phone: req.body.phone
+		}).then(address => {
+			customer.setAddress(address)
+			res.status(200).send({ "success": true, "message": "created successfully" });
+		})
 	});
 };
 
 // FETCH all Customers
 exports.findAll = (req, res) => {
-	Customer.findAll().then(customers => {
-		// Send all customers to Client
-		res.send(customers);
+	Customer.findAll({
+	  attributes: [['uuid', 'customerId'], ['firstname', 'lastname'], 'age'],
+	  include: [{
+		model: Address,
+		where: { fk_customerid: db.Sequelize.col('customer.uuid') },
+		attributes: ['street', 'phone']
+	  }]
+	}).then(customers => {
+	   res.send(customers);
 	});
-};
+   
+  };
 
 // Find a Customer by Id
 exports.findById = (req, res) => {
@@ -106,7 +122,7 @@ exports.jsoncsv = (req, res) => {
 // FETCH all Customers
 exports.uploadfile = (req, res) => {
 	functions.importExcelData2MySQL(__basedir + '../../../uploads/' + req.file.filename);
-  res.json({
+	res.json({
 		'msg': 'File uploaded/import successfully!', 'file': req.file
 	});
 };
