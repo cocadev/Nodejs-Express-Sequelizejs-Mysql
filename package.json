@@ -10,17 +10,21 @@
     "Nodejs",
     "Express",
     "RestAPI",
-    "sequelize",
+    "Sequelize",
     "Download-File",
-    "MySQL"
+    "MySQL",
+    "Authentication",
+    "JWT"
   ],
   "author": "JSA",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "exceljs": "^1.11.0",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "json2csv": "^4.5.1",
+    "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.1",
     "mysql2": "^1.5.3",
     "read-excel-file": "^3.0.1",

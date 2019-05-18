@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
-
 var bodyParser = require('body-parser');
+
+const functions = require('./app/function.js');
 const db = require('./app/config/db.config.js');
+
 
 app.use(bodyParser.json())
 
@@ -10,11 +12,14 @@ var router = express.Router();
 var path = __dirname + '/views/';
 
 // force: true will drop the table if it already exists
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync with { force: true }');
-// });
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync with { force: true }');
+  functions.roleInitial();
+});
+
 
 require('./app/route/customer.route.js')(app);
+require('./app/route/auth.route.js')(app);
 
 router.use(function (req,res,next) { console.log("/" + req.method); next();});
 
@@ -39,3 +44,4 @@ var server = app.listen(8081, function () {
  
   console.log("App listening at http://%s:%s", host, port)
 })
+

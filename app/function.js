@@ -2,6 +2,8 @@ const readXlsxFile = require('read-excel-file/node');
 const mysql = require('mysql2');
 const env = require('./config/env.js');
 
+const db = require('./config/db.config.js');
+const Role = db.role;
 
 exports.importExcelData2MySQL = function(filePath){
     // File path.
@@ -54,4 +56,21 @@ exports.importExcelData2MySQL = function(filePath){
         }
       });
     })
+  }
+
+  exports.roleInitial = function(){
+    Role.create({
+      id: 1,
+      name: "USER"
+    });
+    
+    Role.create({
+      id: 2,
+      name: "ADMIN"
+    });
+    
+    Role.create({
+      id: 3,
+      name: "PM"
+    });
   }
