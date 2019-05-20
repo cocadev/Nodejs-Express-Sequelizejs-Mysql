@@ -20,6 +20,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //Models/tables
+db.generals = require('../model/general.model.js')(sequelize, Sequelize);
+
 db.customers = require('../model/customer.model.js')(sequelize, Sequelize);
 db.address = require('../model/address.model.js')(sequelize, Sequelize);
 db.user = require('../model/user.model.js')(sequelize, Sequelize);

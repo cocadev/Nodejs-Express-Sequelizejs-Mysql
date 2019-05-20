@@ -36,7 +36,7 @@ var path = __dirname + '/views/';
 // force: true will drop the table if it already exists
 // db.sequelize.sync({force: true}).then(() => {
 //   console.log('Drop and Resync with { force: true }');
-//   functions.roleInitial();
+//   // functions.roleInitial();
 // });
 
 
@@ -44,6 +44,7 @@ require('./app/route/customer.route.js')(app);
 require('./app/route/auth.route.js')(app);
 require('./app/route/company.route.js')(app);
 require('./app/route/project.route.js')(app);
+require('./app/route/general.route.js')(app);
 
 router.use(function (req, res, next) { console.log("/" + req.method); next();});
 
