@@ -3,7 +3,8 @@ const config = require('../config/config.js');
 const ROLEs = config.ROLEs; 
 const User = db.user;
 const Role = db.role;
- 
+const General = db.generals;
+
 checkDuplicateUserNameOrEmail = (req, res, next) => {
   // -> Check Username is already in use
   User.findOne({
@@ -31,6 +32,34 @@ checkDuplicateUserNameOrEmail = (req, res, next) => {
     });
   });
 }
+
+checkDuplicateNameOrEmail = (req, res, next) => {
+  // -> Check name is already in use
+  General.findOne({
+    where: {
+      name: req.body.name
+    } 
+  }).then(user => {
+    if(user){
+      res.status(400).send({ "success": false, "message": "name is already taken!" });
+      return;
+    }
+    
+    // -> Check Email is already in use
+    General.findOne({ 
+      where: {
+        email: req.body.email
+      } 
+    }).then(user => {
+      if(user){
+        res.status(400).send({ "success": false, "message": "Email is already in use!" });
+        return;
+      }
+        
+      next();
+    });
+  });
+}
  
 checkRolesExisted = (req, res, next) => {  
   for(let i=0; i<req.body.roles.length; i++){
@@ -41,9 +70,22 @@ checkRolesExisted = (req, res, next) => {
   }
   next();
 }
+
+checkNameEmailExisted = (req, res, next) => {  
+  
+    // if(!req.body.name){ res.status(400).send({ "success": false, "message": "Name is empty" }); return; }
+    // if(!req.body.email){ res.status(400).send({ "success": false, "message": "Email is empty" }); return; }
+
+    // if(req.body.name.length < 3){ res.status(400).send({ "success": false, "message": "Name Length must be over 3." }); return; }
+
+
+  next();
+}
  
 const signUpVerify = {};
 signUpVerify.checkDuplicateUserNameOrEmail = checkDuplicateUserNameOrEmail;
 signUpVerify.checkRolesExisted = checkRolesExisted;
- 
+signUpVerify.checkDuplicateNameOrEmail = checkDuplicateNameOrEmail;
+signUpVerify.checkNameEmailExisted = checkNameEmailExisted;
+
 module.exports = signUpVerify;

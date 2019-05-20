@@ -4,7 +4,9 @@ const General = db.generals;
 // Post a General
 exports.add = (req, res) => {
 	General.create({
-		name: req.body.name,
+        name: req.body.name,
+        email: req.body.email,
+		status: req.body.status,
         house_type: req.body.house_type,
         general_type: req.body.general_type,
 		popularity: req.body.popularity,
@@ -13,7 +15,9 @@ exports.add = (req, res) => {
 		age: req.body.age
 	}).then(createdGeneral => {
 		res.status(200).send({ "success": true, "message": "created successfully", "general": createdGeneral });
-	});
+    }).catch(e =>
+        res.status(500).send({ "success": false, "message": e.message })
+    )
 };
 
 // FETCH all Generals
