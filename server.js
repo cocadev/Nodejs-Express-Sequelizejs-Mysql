@@ -13,8 +13,8 @@ const db = require('./app/config/db.config.js');
 const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
 const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 
-webPush.setVapidDetails('mailto:eugene19950901@outlook.com', publicVapidKey, privateVapidKey);
-webPush.setGCMAPIKey('AIzaSyAvoWrQ8Udyos3cqsqf7ZqjDX2CHvoYGY0');
+webPush.setVapidDetails(process.env.EMAIL, publicVapidKey, privateVapidKey);
+webPush.setGCMAPIKey(process.env.GCMAPIKEY);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json())
@@ -34,10 +34,10 @@ var router = express.Router();
 var path = __dirname + '/views/';
 
 // force: true will drop the table if it already exists
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync with { force: true }');
-//   // functions.roleInitial();
-// });
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync with { force: true }');
+  // functions.roleInitial();
+});
 
 
 require('./app/route/customer.route.js')(app);
