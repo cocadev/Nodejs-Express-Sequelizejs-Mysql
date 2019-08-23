@@ -1,11 +1,13 @@
-const db = require('../config/db.config.js');
-const config = require('../config/config.js');
+import db from '../config/db.config.js'
+import * as config from '../config/config.js'
+
+
 const ROLEs = config.ROLEs; 
 const User = db.user;
 const Role = db.role;
 const General = db.generals;
 
-checkDuplicateUserNameOrEmail = (req, res, next) => {
+export const checkDuplicateUserNameOrEmail = (req, res, next) => {
   // -> Check Username is already in use
   User.findOne({
     where: {
@@ -33,7 +35,7 @@ checkDuplicateUserNameOrEmail = (req, res, next) => {
   });
 }
 
-checkDuplicateNameOrEmail = (req, res, next) => {
+export const checkDuplicateNameOrEmail = (req, res, next) => {
   // -> Check name is already in use
   General.findOne({
     where: {
@@ -61,7 +63,7 @@ checkDuplicateNameOrEmail = (req, res, next) => {
   });
 }
  
-checkRolesExisted = (req, res, next) => {  
+export const checkRolesExisted = (req, res, next) => {  
   for(let i=0; i<req.body.roles.length; i++){
     if(!ROLEs.includes(req.body.roles[i].toUpperCase())){
       res.status(400).send({ "success": false, "message": "Does NOT exist Role = " + req.body.roles[i] });
@@ -71,7 +73,7 @@ checkRolesExisted = (req, res, next) => {
   next();
 }
 
-checkNameEmailExisted = (req, res, next) => {  
+export const checkNameEmailExisted = (req, res, next) => {  
   
     // if(!req.body.name){ res.status(400).send({ "success": false, "message": "Name is empty" }); return; }
     // if(!req.body.email){ res.status(400).send({ "success": false, "message": "Email is empty" }); return; }
@@ -82,10 +84,10 @@ checkNameEmailExisted = (req, res, next) => {
   next();
 }
  
-const signUpVerify = {};
-signUpVerify.checkDuplicateUserNameOrEmail = checkDuplicateUserNameOrEmail;
-signUpVerify.checkRolesExisted = checkRolesExisted;
-signUpVerify.checkDuplicateNameOrEmail = checkDuplicateNameOrEmail;
-signUpVerify.checkNameEmailExisted = checkNameEmailExisted;
+// const signUpVerify = {};
+// signUpVerify.checkDuplicateUserNameOrEmail = checkDuplicateUserNameOrEmail;
+// signUpVerify.checkRolesExisted = checkRolesExisted;
+// signUpVerify.checkDuplicateNameOrEmail = checkDuplicateNameOrEmail;
+// signUpVerify.checkNameEmailExisted = checkNameEmailExisted;
 
-module.exports = signUpVerify;
+// module.exports = signUpVerify;

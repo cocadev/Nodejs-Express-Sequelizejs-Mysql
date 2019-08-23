@@ -1,20 +1,25 @@
-require('dotenv').config({ path: '../../.env' });
+import dotenv from 'dotenv'
 
-const env = {
-  database: 'wangharry',
-  username: 'wangharry',
-  password: '123qwe!@#QWE',
-  host: "85.10.205.173",
-  dialect: 'mysql',
-  pool: {
-	  max: 5,
-	  min: 0,
-	  acquire: 30000,
-	  idle: 10000
-  },
-  PORT : 5000,
-  PUBLIC_VAPID_KEY : process.env.DATABASE.PUBLIC_VAPID_KEY,
-  PRIVATE_VAPID_KEY : process.env.DATABASE.PRIVATE_VAPID_KEY,
+// Load .env
+dotenv.config()
+
+// URL
+export const APP_URL = process.env.APP_URL
+export const APP_URL_API = process.env.APP_URL_API
+
+export const NODE_ENV = process.env.NODE_ENV
+export const PORT = process.env.PORT || 5000
+export const PUBLIC_VAPID_KEY = process.env.PUBLIC_VAPID_KEY
+export const PRIVATE_VAPID_KEY = process.env.PRIVATE_VAPID_KEY
+export const GCMAPIKEY = process.env.GCMAPIKEY
+export const DATABASE = process.env.DATABASE
+export const USERNAME = process.env.USERNAME
+export const PASSWORD = process.env.PASSWORD
+export const HOST = process.env.HOST
+export const DIALECT = process.env.DIALECT
+export const POOL = {
+  max: 5,
+  min: 0,
+  acquire: 30000,
+  idle: 10000
 };
-
-module.exports = env;

@@ -4,7 +4,7 @@ const db = require('../config/db.config.js');
 const Role = db.role;
 const User = db.user;
  
-verifyToken = (req, res, next) => {
+export const verifyToken = (req, res, next) => {
   let token = req.headers['x-access-token'];
   
   if (!token){
@@ -25,7 +25,7 @@ verifyToken = (req, res, next) => {
   });
 }
  
-isAdmin = (req, res, next) => {
+export const isAdmin = (req, res, next) => {
   
   User.findById(req.userId)
     .then(user => {
@@ -44,7 +44,7 @@ isAdmin = (req, res, next) => {
     })
 }
  
-isPmOrAdmin = (req, res, next) => {
+export const isPmOrAdmin = (req, res, next) => {
   
   User.findById(req.userId)
     .then(user => {
@@ -66,9 +66,9 @@ isPmOrAdmin = (req, res, next) => {
     })
 }
  
-const authJwt = {};
-authJwt.verifyToken = verifyToken;
-authJwt.isAdmin = isAdmin;
-authJwt.isPmOrAdmin = isPmOrAdmin;
+// const authJwt = {};
+// authJwt.verifyToken = verifyToken;
+// authJwt.isAdmin = isAdmin;
+// authJwt.isPmOrAdmin = isPmOrAdmin;
  
-module.exports = authJwt;
+// module.exports = authJwt;

@@ -1,17 +1,12 @@
-const env = require('./env.js');
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(env.database, env.username, env.password, {
-  host: env.host,
-  dialect: env.dialect,
+import Sequelize from 'sequelize';
+import * as ENV from '../config/env'
+
+const sequelize = new Sequelize(ENV.DATABASE, 'root', '', {
+  host:             ENV.HOST,
+  dialect:          ENV.DIALECT,
   operatorsAliases: false,
-
-  pool: {
-    max: env.max,
-    min: env.pool.min,
-    acquire: env.pool.acquire,
-    idle: env.pool.idle
-  }
+  pool:             ENV.POOL
 });
 
 const db = {};
@@ -41,9 +36,5 @@ db.product.belongsTo(db.company, {foreignKey: 'fk_companyid', targetKey: 'uuid'}
 
 db.project.belongsToMany(db.user, { as: 'Workers', through: 'worker_tasks', foreignKey: 'projectId', otherKey: 'userId'});
 db.user.belongsToMany(db.project, { as: 'Tasks', through: 'worker_tasks', foreignKey: 'userId', otherKey: 'projectId'});
- 
- 
-module.exports = db;
-
 
 module.exports = db;

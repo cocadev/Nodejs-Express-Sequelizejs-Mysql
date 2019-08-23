@@ -1,4 +1,4 @@
-const multer = require('multer');
+import multer from 'multer'
 
 module.exports = function(app) {
  
