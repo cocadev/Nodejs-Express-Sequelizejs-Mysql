@@ -1,4 +1,4 @@
-import projects from '../controller/project.controller.js'
+import * as projects from '../controller/project.controller.js'
 
 export default function(app) {
   

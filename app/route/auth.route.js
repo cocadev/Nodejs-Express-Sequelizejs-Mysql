@@ -1,9 +1,9 @@
-const verifySignUp = require('../auth/verifySignUp');
-const authJwt = require('../auth/verifyJwtToken');
+import * as verifySignUp from '../auth/verifySignUp';
+import * as authJwt from '../auth/verifyJwtToken';
+import * as controller from '../controller/auth.controller';
+
+export default function(app) {
  
-module.exports = function(app) {
- 
-  const controller = require('../controller/auth.controller');
  
   app.post('/api/auth/signup', [verifySignUp.checkDuplicateUserNameOrEmail, verifySignUp.checkRolesExisted], controller.signup);
   

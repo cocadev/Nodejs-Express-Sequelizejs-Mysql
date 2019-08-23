@@ -10,7 +10,7 @@ const functions = require('../function.js');
 global.__basedir = __dirname;
 
 // Post a Customer
-exports.create = (req, res) => {
+export const create = (req, res) => {
 	// Save to MySQL database
 	Customer.create({
 		firstname: req.body.firstname,
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 };
 
 // FETCH all Customers
-exports.findAll = (req, res) => {
+export const findAll = (req, res) => {
 	Customer.findAll({
 	  attributes: [['uuid', 'customerId'], ['firstname', 'lastname'], 'age'],
 	  include: [{
@@ -45,14 +45,14 @@ exports.findAll = (req, res) => {
   };
 
 // Find a Customer by Id
-exports.findById = (req, res) => {
+export const findById = (req, res) => {
 	Customer.findById(req.params.customerId).then(customer => {
 		res.send(customer);
 	})
 };
 
 // Update a Customer
-exports.update = (req, res) => {
+export const update = (req, res) => {
 	const id = req.params.customerId;
 	Customer.update({ firstname: req.body.firstname, lastname: req.body.lastname, age: req.body.age },
 		{ where: { id: req.params.customerId } }
@@ -62,7 +62,7 @@ exports.update = (req, res) => {
 };
 
 // Delete a Customer by Id
-exports.delete = (req, res) => {
+export const deleteCustomer = (req, res) => {
 	const id = req.params.customerId;
 	Customer.destroy({
 		where: { id: id }
@@ -72,7 +72,7 @@ exports.delete = (req, res) => {
 };
 
 // excel all Customers
-exports.excel = (req, res) => {
+export const excelCustomer = (req, res) => {
 	Customer.findAll().then(customers => {
 
 		const jsonCustomers = JSON.parse(JSON.stringify(customers));
@@ -101,7 +101,7 @@ exports.excel = (req, res) => {
 };
 
 // jsoncsv all Customers
-exports.jsoncsv = (req, res) => {
+export const jsoncsv = (req, res) => {
 	Customer.findAll().then(customers => {
 
 		const jsonCustomers = JSON.parse(JSON.stringify(customers));
@@ -120,7 +120,7 @@ exports.jsoncsv = (req, res) => {
 
 
 // FETCH all Customers
-exports.uploadfile = (req, res) => {
+export const uploadfile = (req, res) => {
 	functions.importExcelData2MySQL(__basedir + '../../../uploads/' + req.file.filename);
 	res.json({
 		'msg': 'File uploaded/import successfully!', 'file': req.file

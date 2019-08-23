@@ -3,7 +3,7 @@ const Company = db.company;
 const Product = db.product;
  
 // Init data: Companies & Products
-exports.init = (req, res) => {  
+export const init = (req, res) => {  
   
   // Apple company
   Company.create({ 
@@ -60,7 +60,7 @@ exports.init = (req, res) => {
 };
  
 // Fetch all Companies include Products
-exports.findAll = (req, res) => {
+export const findAll = (req, res) => {
   Company.findAll({
     attributes: [['uuid', 'companyId'], 'name', 'street', 'phone'],
     include: [{

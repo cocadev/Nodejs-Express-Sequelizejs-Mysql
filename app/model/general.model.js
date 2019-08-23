@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const General = sequelize.define('general', {
       id: {
         autoIncrement: true,

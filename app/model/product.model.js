@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Product = sequelize.define('product', {
       code: {
         type: Sequelize.STRING

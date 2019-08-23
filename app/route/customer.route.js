@@ -1,8 +1,8 @@
 import multer from 'multer'
+import * as customers from '../controller/customer.controller.js';
 
 module.exports = function(app) {
  
-    const customers = require('../controller/customer.controller.js');
 
     global.__basedir = __dirname;
  
@@ -23,8 +23,8 @@ module.exports = function(app) {
     app.get('/api/getAllCustomers', customers.findAll);
     app.get('/api/getOneCustomer/:customerId', customers.findById);
     app.put('/api/updateCustomer/:customerId', customers.update);
-    app.delete('/api/deleteCustomer/:customerId', customers.delete);
-    app.get('/api/downloadAllCustomers/excel', customers.excel);
+    app.delete('/api/deleteCustomer/:customerId', customers.deleteCustomer);
+    app.get('/api/downloadAllCustomers/excel', customers.excelCustomer);
     app.get('/api/downloadAllCustomers/jsoncsv', customers.jsoncsv);
     app.post('/api/customer/upload', upload.single("uploadfile"), customers.uploadfile);
 

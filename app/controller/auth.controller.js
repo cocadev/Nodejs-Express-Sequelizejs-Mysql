@@ -7,7 +7,7 @@ const User = db.user;
 const Role = db.role;
 const Op = db.Sequelize.Op;
 
-exports.signup = (req, res) => {
+export const signup = (req, res) => {
   // Save User to Database
   console.log("Processing func -> SignUp");
 
@@ -35,7 +35,7 @@ exports.signup = (req, res) => {
   })
 }
 
-exports.signin = (req, res) => {
+export const signin = (req, res) => {
   console.log("Sign-In");
 
   User.findOne({
@@ -63,7 +63,7 @@ exports.signin = (req, res) => {
   });
 }
 
-exports.userContent = (req, res) => {
+export const userContent = (req, res) => {
   User.findOne({
     where: { id: req.userId },
     attributes: ['name', 'username', 'email'],
@@ -87,7 +87,7 @@ exports.userContent = (req, res) => {
   })
 }
 
-exports.adminBoard = (req, res) => {
+export const adminBoard = (req, res) => {
   User.findOne({
     where: { id: req.userId },
     attributes: ['name', 'username', 'email'],
@@ -111,7 +111,7 @@ exports.adminBoard = (req, res) => {
   })
 }
 
-exports.managementBoard = (req, res) => {
+export const managementBoard = (req, res) => {
   User.findOne({
     where: { id: req.userId },
     attributes: ['name', 'username', 'email'],

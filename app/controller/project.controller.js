@@ -4,7 +4,7 @@ const Project = db.project;
 const User = db.user;
  
 // Init data: Projects & Users
-exports.init = (req, res) => {  
+export const init = (req, res) => {  
  
   User.create({
     firstname: "Jack",
@@ -41,7 +41,7 @@ exports.init = (req, res) => {
 };
  
 // Fetch all Projects include Users
-exports.findAll = (req, res) => {
+export const findAll = (req, res) => {
   Project.findAll({
     attributes: ['code', 'name'],
     include: [{

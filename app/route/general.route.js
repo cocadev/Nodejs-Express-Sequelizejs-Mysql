@@ -1,9 +1,9 @@
-import { checkNameEmailExisted, checkDuplicateNameOrEmail} from '../auth/verifySignUp';
-import generals from '../controller/general.controller.js'
+import * as addGeneral from '../auth/verifySignUp';
+import * as generals from '../controller/general.controller.js'
 
 export default function(app) {
  
-    app.post('/api/addGeneral', [ checkNameEmailExisted, checkDuplicateNameOrEmail], generals.add);
+    app.post('/api/addGeneral', [ addGeneral.checkNameEmailExisted, addGeneral.checkDuplicateNameOrEmail], generals.add);
     app.get('/api/generals', generals.findAll);
 
 }

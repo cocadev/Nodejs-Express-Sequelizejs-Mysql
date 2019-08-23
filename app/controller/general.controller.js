@@ -4,7 +4,7 @@ const General = db.generals;
 const Op = db.Sequelize.Op;
 
 // Post a General
-exports.add = (req, res) => {
+export const add = (req, res) => {
 	General.create({
         name: req.body.name,
         email: req.body.email,
@@ -23,7 +23,7 @@ exports.add = (req, res) => {
 };
 
 // FETCH all Generals
-exports.findAll = (req, res) => {
+export const findAll = (req, res) => {
 	let query = req.query.name?req.query.name:''
 	let page = req.query.page?parseInt(req.query.page):0
 	let limit = req.query.limit?parseInt(req.query.limit):100
