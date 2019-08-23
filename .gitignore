@@ -65,3 +65,5 @@ fastlane/screenshots
 WeiPay.app.dSYM.zip
 
 ./fastlane/playstore-api-key.json
+
+uploads/
