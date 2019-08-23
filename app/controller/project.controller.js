@@ -1,4 +1,5 @@
-const db = require('../config/db.config.js');
+import db from '../config/db.js';
+
 const Project = db.project;
 const User = db.user;
  

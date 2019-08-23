@@ -1,8 +1,8 @@
-const readXlsxFile = require('read-excel-file/node');
-const mysql = require('mysql2');
-const env = require('./config/env.js');
+import readXlsxFile from 'read-excel-file/node';
+import mysql from 'mysql2';
+import db from './config/db.js';
+import * as env from './config/env.js';
 
-const db = require('./config/db.config.js');
 const Role = db.role;
 
 exports.importExcelData2MySQL = function(filePath){

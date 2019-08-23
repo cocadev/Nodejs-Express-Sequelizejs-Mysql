@@ -17,6 +17,9 @@ export const USERNAME = process.env.USERNAME
 export const PASSWORD = process.env.PASSWORD
 export const HOST = process.env.HOST
 export const DIALECT = process.env.DIALECT
+export const EMAIL = process.env.EMAIL
+export const SECRET = 'grokonez-super-secret-key'
+export const ROLES = ['USER', 'ADMIN', 'PM']
 export const POOL = {
   max: 5,
   min: 0,

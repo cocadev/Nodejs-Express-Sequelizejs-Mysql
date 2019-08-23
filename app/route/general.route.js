@@ -1,10 +1,9 @@
-const verifySignUp = require('../auth/verifySignUp');
+import { checkNameEmailExisted, checkDuplicateNameOrEmail} from '../auth/verifySignUp';
+import generals from '../controller/general.controller.js'
 
-module.exports = function(app) {
+export default function(app) {
  
-    const generals = require('../controller/general.controller.js');
-
-    app.post('/api/addGeneral', [ verifySignUp.checkNameEmailExisted, verifySignUp.checkDuplicateNameOrEmail], generals.add);
+    app.post('/api/addGeneral', [ checkNameEmailExisted, checkDuplicateNameOrEmail], generals.add);
     app.get('/api/generals', generals.findAll);
 
 }

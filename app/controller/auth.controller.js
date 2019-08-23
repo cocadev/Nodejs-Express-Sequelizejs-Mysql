@@ -1,12 +1,11 @@
-const db = require('../config/db.config.js');
-const config = require('../config/config.js');
+import db from '../config/db.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import * as config from '../config/env'
+
 const User = db.user;
 const Role = db.role;
-
 const Op = db.Sequelize.Op;
-
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcryptjs');
 
 exports.signup = (req, res) => {
   // Save User to Database
@@ -53,7 +52,7 @@ exports.signin = (req, res) => {
       return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!" });
     }
 
-    var token = jwt.sign({ id: user.id }, config.secret, {
+    var token = jwt.sign({ id: user.id }, config.SECRET, {
       expiresIn: 86400 // expires in 24 hours
     });
 

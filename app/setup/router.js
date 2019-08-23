@@ -1,25 +1,24 @@
 import express from 'express'
 import path from 'path'
 
+import route_customer   from '../../app/route/customer.route.js'
+import auth_route       from '../../app/route/auth.route.js'
+import company_route    from '../../app/route/company.route.js'
+import project_route    from '../../app/route/project.route.js'
+import general_route    from '../../app/route/general.route.js'
+
 const router = express.Router();
 
-// var router = express.Router();
+export default function(app) {
 
-module.exports = function(app) {
-
-    require('../../app/route/customer.route.js')(app);
-    require('../../app/route/auth.route.js')(app);
-    require('../../app/route/company.route.js')(app);
-    require('../../app/route/project.route.js')(app);
-    require('../../app/route/general.route.js')(app);
-
+    route_customer(app)
+    auth_route(app)
+    company_route(app)
+    project_route(app)
+    general_route(app)
     
-
     router.use(function (req, res, next) { console.log("/" + req.method); next(); });
 
-    ////////////
-    // Router //
-    ////////////
     router.get("/", function (req, res) { 
         res.sendFile(path.join(__dirname, '..', '..', 'views', 'index.html')) 
     });
@@ -35,10 +34,8 @@ module.exports = function(app) {
     });
 
     app.use("/", router);
-    // app.use("*", function (req, res) { res.sendFile(router_path + "404.html") });
-
-
-    
-
+    app.use("*", function (req, res) { 
+        res.sendFile(path.join(__dirname, '..', '..', 'views', '404.html')) 
+    });
 
 }

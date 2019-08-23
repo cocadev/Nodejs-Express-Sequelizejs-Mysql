@@ -1,4 +1,4 @@
-const db = require('../config/db.config.js');
+import db from '../config/db.js';
 const Company = db.company;
 const Product = db.product;
  

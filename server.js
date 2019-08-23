@@ -11,8 +11,8 @@ import setupStartServer from './app/setup/start-server'
 const app = express();
 
 setupLoadModules(app)
-// setupNotification(app)
-// setupDB(app)
+setupNotification(app)
+setupDB(app)
 setupRouter(app)
 setupStartServer(app)
 

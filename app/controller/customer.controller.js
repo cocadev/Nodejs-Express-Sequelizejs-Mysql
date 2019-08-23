@@ -1,6 +1,6 @@
-const db = require('../config/db.config.js');
-const excel = require('exceljs');
-const Json2csvParser = require('json2csv').Parser;
+import db from '../config/db.js';
+import excel from 'exceljs';
+import { Parser } from 'json2csv'
 
 const Customer = db.customers;
 const Address = db.address;
@@ -108,7 +108,7 @@ exports.jsoncsv = (req, res) => {
 
 		// -> Convert JSON to CSV data
 		const csvFields = ['id', 'firstname', 'lastname', 'age'];
-		const json2csvParser = new Json2csvParser({ csvFields });
+		const json2csvParser = new Parser({ csvFields });
 		const csvData = json2csvParser.parse(jsonCustomers);
 
 		// -> Send CSV File to Client

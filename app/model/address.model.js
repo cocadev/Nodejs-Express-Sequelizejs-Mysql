@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Address = sequelize.define('address', {
       street: {
         type: Sequelize.STRING

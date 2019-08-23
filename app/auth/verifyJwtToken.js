@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/config.js');
-const db = require('../config/db.config.js');
-const Role = db.role;
+import jwt from 'jsonwebtoken';
+import db from'../config/db.js';
+import * as config from '../config/env'
+
 const User = db.user;
  
 export const verifyToken = (req, res, next) => {
@@ -66,9 +66,3 @@ export const isPmOrAdmin = (req, res, next) => {
     })
 }
  
-// const authJwt = {};
-// authJwt.verifyToken = verifyToken;
-// authJwt.isAdmin = isAdmin;
-// authJwt.isPmOrAdmin = isPmOrAdmin;
- 
-// module.exports = authJwt;

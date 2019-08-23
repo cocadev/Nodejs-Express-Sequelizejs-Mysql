@@ -1,10 +1,8 @@
-import db from '../config/db.config.js'
-import * as config from '../config/config.js'
+import db from '../config/db.js'
+import * as config from '../config/env'
 
-
-const ROLEs = config.ROLEs; 
+const ROLES = config.ROLES; 
 const User = db.user;
-const Role = db.role;
 const General = db.generals;
 
 export const checkDuplicateUserNameOrEmail = (req, res, next) => {
@@ -65,7 +63,7 @@ export const checkDuplicateNameOrEmail = (req, res, next) => {
  
 export const checkRolesExisted = (req, res, next) => {  
   for(let i=0; i<req.body.roles.length; i++){
-    if(!ROLEs.includes(req.body.roles[i].toUpperCase())){
+    if(!ROLES.includes(req.body.roles[i].toUpperCase())){
       res.status(400).send({ "success": false, "message": "Does NOT exist Role = " + req.body.roles[i] });
       return;
     }
@@ -83,11 +81,3 @@ export const checkNameEmailExisted = (req, res, next) => {
 
   next();
 }
- 
-// const signUpVerify = {};
-// signUpVerify.checkDuplicateUserNameOrEmail = checkDuplicateUserNameOrEmail;
-// signUpVerify.checkRolesExisted = checkRolesExisted;
-// signUpVerify.checkDuplicateNameOrEmail = checkDuplicateNameOrEmail;
-// signUpVerify.checkNameEmailExisted = checkNameEmailExisted;
-
-// module.exports = signUpVerify;

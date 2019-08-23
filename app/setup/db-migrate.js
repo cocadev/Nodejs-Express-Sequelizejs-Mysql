@@ -1,7 +1,4 @@
-
-
-
-const db = require('../../app/config/db.config.js');
+import db from '../config/db.js'
 
 export default function (server) {
 

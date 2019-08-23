@@ -21,9 +21,6 @@ export default function (server) {
   // Request body cookie parser
   server.use(cookieParser())
 
-  // Static files folder
-  // server.use(express.static(path.join(__dirname, '..', '..', 'public')))
-
   // HTTP logger
   // if(NODE_ENV === 'development') {
   //   server.use(morgan('tiny'))

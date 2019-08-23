@@ -1,15 +1,14 @@
-require('dotenv').config({ path: '../../../.env' });
-
-var webPush = require('web-push');
-// const functions = require('./app/function.js');
+import webPush from 'web-push';
+// import functions from './app/function.js';
+import * as config from '../config/env';
 
 export default function (app) {
 
-    const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
-    const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
+    const publicVapidKey = config.PUBLIC_VAPID_KEY;
+    const privateVapidKey = config.PRIVATE_VAPID_KEY;
 
-    webPush.setVapidDetails(process.env.EMAIL, publicVapidKey, privateVapidKey);
-    webPush.setGCMAPIKey(process.env.GCMAPIKEY);
+    webPush.setVapidDetails(config.EMAIL, publicVapidKey, privateVapidKey);
+    webPush.setGCMAPIKey(config.GCMAPIKEY);
 
     app.post('/subscribe', function (req, res) {
         const subscription = req.body
