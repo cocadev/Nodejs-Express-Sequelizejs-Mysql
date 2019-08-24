@@ -1,6 +1,7 @@
 import db from '../config/db.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import Sequelize from 'sequelize';
 import * as config from '../config/env'
 
 const User = db.user;
@@ -9,31 +10,62 @@ const Op = db.Sequelize.Op;
 
 export const signup = (req, res) => {
   // Save User to Database
-  console.log("Processing func -> SignUp");
+  let username = req.body.username
+  let email = req.body.email
+  let password = req.body.password
+  let confirm_password = req.body.confirm_password
 
-  User.create({
-    name: req.body.name,
-    username: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
-  }).then(user => {
-    Role.findAll({
-      where: {
-        name: {
-          [Op.or]: req.body.roles
-        }
-      }
-    }).then(roles => {
-      user.setRoles(roles).then(() => {
-        res.status(200).send({ "success": true, "message": "User registered successfully!", "user": user, "roles": roles });
-      });
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    });
-  }).catch(err => {
-    res.status(500).send("Fail! Error -> " + err);
-  })
+  console.log("Processing func -> SignUp", password);
+
+
+  if(username && email && password.length < 8){
+    let message = null
+    if( password !== confirm_password){
+      message = 'Password is not matched.'
+    } else {
+      message = 'Password should be over 8 letters'
+    }
+    res.status(400).send({ "success": false, message });
+    return false
+  }
+
+  User
+    .create({
+      username: req.body.username,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+      rule: req.body.rule,
+
+    })
+    .then(function (user) {
+      res.status(200).send({ "success": true, "message": "User registered successfully!", "user": user });
+    })
+    .catch(function (err) {
+      console.log('******** err ********', err.errors[0].message)
+      res.status(400).send({ "success": false, "message": err.errors[0].message });
+
+    })
+
 }
+
+
+//   Role.findAll({
+//     where: {
+//       name: {
+//         [Op.or]: req.body.roles
+//       }
+//     }
+//   }).then(roles => {
+//     user.setRoles(roles).then(() => {
+//       res.status(200).send({ "success": true, "message": "User registered successfully!", "user": user, "roles": roles });
+//     });
+//   }).catch(err => {
+//     res.status(500).send("Error -> " + err);
+//   });
+// }).catch(err => {
+//   res.status(500).send("Fail! Error -> " + err);
+// })
+
 
 export const signin = (req, res) => {
   console.log("Sign-In");
