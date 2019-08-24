@@ -28,6 +28,9 @@ export default function(app) {
     router.get("/push", function (req, res) { 
         res.sendFile(path.join(__dirname, '..', '..', 'views', 'push.html')) 
     });
+    router.get("/wrld", function (req, res) { 
+        res.sendFile(path.join(__dirname, '..', '..', 'views', 'wrld', 'index.html')) 
+    });
 
     app.get("/api/image", function (req, res) {
         res.sendFile(path.join(__dirname, '..', '..', 'resources', 'static', 'image', 'astro.png'))

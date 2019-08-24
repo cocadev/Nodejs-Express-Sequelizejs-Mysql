@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
+  </head>
+  
+  <body>
+  <div style="position: relative">
+    <div id="map" style="height: 100vh"></div>
+    <script>
+    
+      ///////////////////////// default map ///////////////////////////
+      var map = L.Wrld.map("map", "956198da4d9cfb1994cc71da58e0196f", {
+        center: [37.7858, -122.401],
+        zoom: 16
+      });
+
+      //////////////////////// Moving camera //////////////////////////
+    //   setTimeout(function() {
+    //   	map.setView([37.7952, -122.4028], 19, {
+    //       animate: false
+    //     });
+    //   }, 5000);
+
+      ////////////////////////adjusting-heading-and-tilt camera //////////////////////////
+
+      setTimeout(function() {
+      	map.setCameraHeadingDegrees(45).setCameraTiltDegrees(20);
+      }, 1000);
+
+      //////////////////////// animating camera //////////////////////////
+
+      setTimeout(function() {
+      	map.setView([37.802, -122.4058], 18, {
+          headingDegrees: 270,
+          animate: true,
+          durationSeconds:5
+        });
+      }, 5000);
+
+      //   framing-an-area -Camera
+      setTimeout(function() {
+      	var bounds = L.latLngBounds([37.786647, -122.407015], [37.798886, -122.395116]);
+      	map.fitBounds(bounds);
+      }, 5000);
+
+    //   // querying-camera-location
+
+    //   var popup = L.popup({closeOnClick: false}).setLatLng(map.getCenter());
+    //   popup.addTo(map);
+
+    //   function updatePopup() {
+    //     var zoom = map.getZoom();
+    //     var center = map.getCenter();
+    //     var lat = center.lat.toFixed(3);
+    //     var lng = center.lng.toFixed(3);
+    //     popup.setLatLng(center);
+    //     popup.setContent("LatLng: " + lat + ", " + lng + "<br/>" + "Zoom: " + zoom);
+    //   }
+
+    //   // The update event is fired every frame
+    //   map.on("update", updatePopup);
+
+    </script>
+
+  </div>
+  </body>
+</html>
