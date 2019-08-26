@@ -1,13 +1,15 @@
 import db from '../config/db.js';
 
-const User = db.user;
- 
-export const update = (req, res) => {  
+const Profile = db.profile;
+
+export const updateOne = (req, res) => {
+
+  let uuid = req.query.id
 
   let firstName = req.body.firstName
   let surName = req.body.surName
   let image = req.body.image
-  let username = req.body.username
+  let location = req.body.location
   let dateOfBirth = req.body.dateOfBirth
   let placeOfBirth = req.body.placeOfBirth
   let nationality = req.body.nationality
@@ -16,12 +18,12 @@ export const update = (req, res) => {
   let phone = req.body.phone
   let website = req.body.website
   let job = req.body.job
- 
-  User.create({
-    firstName, 
+
+  Profile.update({
+    firstName,
     surName,
     image,
-    username,
+    location,
     dateOfBirth,
     placeOfBirth,
     nationality,
@@ -29,8 +31,19 @@ export const update = (req, res) => {
     address,
     phone,
     website,
-    job
-  }).then(result => {
-      console.log( '~~~~~~~~~~~~~~~~~~', result)
+    job,
+  }, { where: { uuid } })
+  .then(result => {
+    console.log('~~~~~~~~~~~~~~~~~~', result)
+    res.status(200).json({
+      "success": true,
+      "message": "Update success!"
+    });
+  }).catch(e =>  {
+    console.log('*********************', e)
+    res.status(500).json({
+      "success": false,
+      "message": "Bad Request",
+    });
   })
 };

@@ -8,6 +8,7 @@ export default (sequelize, Sequelize) => {
     firstName: Sequelize.STRING,
     surName: Sequelize.STRING,
     image: Sequelize.STRING,
+    location: Sequelize.STRING,
     dateOfBirth: Sequelize.STRING,
     placeOfBirth: Sequelize.STRING,
     nationality: Sequelize.STRING,

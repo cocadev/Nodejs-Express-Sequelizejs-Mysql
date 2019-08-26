@@ -1,7 +1,6 @@
 import db from '../config/db.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import Sequelize from 'sequelize';
 import * as config from '../config/env'
 import { InitialDB } from '../config/initial-db'
 
@@ -9,7 +8,6 @@ const User = db.user;
 const Profile = db.profile;
 
 const Role = db.role;
-const Op = db.Sequelize.Op;
 
 export const init = (req, res) => {
 
@@ -21,7 +19,18 @@ export const init = (req, res) => {
   }).then(createdUser => {
 
     return Profile.create({
-      firstName: createdUser.username
+      firstName: item.firstName,
+      surName: item.surName,
+      image: item.image,
+      location: item.location,
+      dateOfBirth: item.dateOfBirth,
+      placeOfBirth: item.placeOfBirth,
+      nationality: item.nationality,
+      maritalStatus: item.maritalStatus,
+      address: item.address,
+      phone: item.phone,
+      website: item.website,
+      job: item.job,
     }).then(result => {
       createdUser.setProfile(result)
     })

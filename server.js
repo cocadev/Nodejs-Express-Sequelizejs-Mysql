@@ -12,7 +12,7 @@ const app = express();
 
 setupLoadModules(app)
 setupNotification(app)
-// setupDB(app)
+setupDB(app)
 setupRouter(app)
 setupStartServer(app)
 

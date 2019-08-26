@@ -40,7 +40,7 @@ export const isAdmin = (req, res, next) => {
         return false
       }
 
-      console.log('___ user ___', user)
+      // console.log('___ user ___', user)
 
       if (user.dataValues.rule === "ADMIN") {
         next();

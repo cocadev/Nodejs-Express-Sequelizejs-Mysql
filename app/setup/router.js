@@ -6,6 +6,7 @@ import auth_route from '../../app/route/auth.route.js'
 import company_route from '../../app/route/company.route.js'
 import project_route from '../../app/route/project.route.js'
 import general_route from '../../app/route/general.route.js'
+import profile_route from '../../app/route/profile.route.js'
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ export default function (app) {
     company_route(app)
     project_route(app)
     general_route(app)
+    profile_route(app)
 
     router.use(function (req, res, next) { console.log("/" + req.method); next(); });
 
