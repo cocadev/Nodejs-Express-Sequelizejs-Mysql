@@ -3,9 +3,7 @@ import * as authJwt from '../auth/verifyJwtToken';
 import * as controller from '../controller/auth.controller';
 
 export default function(app) {
- 
-  app.get('/api/auth/init', controller.init);
- 
+  
   app.post('/api/auth/signup', controller.signup);
   
   app.post('/api/auth/signin', controller.signin);

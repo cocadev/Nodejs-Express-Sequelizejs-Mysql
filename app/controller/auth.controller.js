@@ -2,45 +2,9 @@ import db from '../config/db.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import * as config from '../config/env'
-import { InitialDB } from '../config/initial-db'
 
 const User = db.user;
-const Profile = db.profile;
-
 const Role = db.role;
-
-export const init = (req, res) => {
-
-  InitialDB.AUTH.map((item) => User.create({
-    username: item.username,
-    email: item.email,
-    password: bcrypt.hashSync(item.password, 8),
-    rule: item.rule
-  }).then(createdUser => {
-
-    return Profile.create({
-      firstName: item.firstName,
-      surName: item.surName,
-      image: item.image,
-      location: item.location,
-      dateOfBirth: item.dateOfBirth,
-      placeOfBirth: item.placeOfBirth,
-      nationality: item.nationality,
-      maritalStatus: item.maritalStatus,
-      address: item.address,
-      phone: item.phone,
-      website: item.website,
-      job: item.job,
-    }).then(result => {
-      createdUser.setProfile(result)
-    })
-  })
-  )
-
-  return res.status(200).send({ "success": true, "message": "DB INFO Created!" });
-
-
-}
 
 export const signup = (req, res) => {
   // Save User to Database
@@ -50,7 +14,6 @@ export const signup = (req, res) => {
   let confirm_password = req.body.confirm_password
 
   console.log("Processing func -> SignUp", password);
-
 
   if (username && email && password.length < 8) {
     let message = null

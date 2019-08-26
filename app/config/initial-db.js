@@ -1,12 +1,12 @@
 export const InitialDB = {
     AUTH: [
         { 
-            username: "Nortom", 
-            email: "nortom1@i.com", 
+            username: "Wang1995", 
+            email: "wang@i.com", 
             password: '123123123', 
             rule: 'ADMIN', 
-            firstName: 'Nor', 
-            surName: 'Tom',
+            firstName: 'Wang', 
+            surName: 'Tam',
             image: 'https://www.pngarts.com/files/3/Cute-Panda-PNG-Image.png',
             location: '29.23143,12.0923',
             dateOfBirth: '1988-01-21',
@@ -19,12 +19,12 @@ export const InitialDB = {
             job: 'doctor'
         },
         { 
-            username: "Zeus", 
-            email: "zeus@i.com", 
+            username: "Harry", 
+            email: "harry@i.com", 
             password: '123123123', 
             rule: 'ADMIN', 
-            firstName: 'Zeus', 
-            surName: 'Poseidon',
+            firstName: 'Harry', 
+            surName: 'killer',
             image: 'https://www.pngarts.com/files/3/Cute-Panda-PNG-Image.png',
             location: '29.123,92.0923',
             dateOfBirth: '1988-01-21',
@@ -37,12 +37,12 @@ export const InitialDB = {
             job: 'doctor'
         },
         { 
-            username: "Invoker", 
-            email: "nortom3@i.com", 
+            username: "Joaquim", 
+            email: "joaquim@i.com", 
             password: '123123123', 
             rule: 'ADMIN', 
-            firstName: 'Invoker', 
-            surName: 'Heraculas',
+            firstName: 'Joa', 
+            surName: 'Quim',
             image: 'https://www.pngarts.com/files/3/Cute-Panda-PNG-Image.png',
             location: '19.23143,22.0923',
             dateOfBirth: '1991-01-21',
@@ -55,15 +55,26 @@ export const InitialDB = {
             job: 'worker'
         },
 
-        { username: "Windrunner1", email: "windrunner1@a.com", password: '123123123', rule: 'USER' },
-        { username: "Windrunner2", email: "windrunner2@a.com", password: '123123123', rule: 'USER' },
-        { username: "Windrunner3", email: "windrunner3@a.com", password: '123123123', rule: 'USER' },
-        { username: "Windrunner4", email: "windrunner4@a.com", password: '123123123', rule: 'USER' },
+        { username: "Cunha", email: "cunha@a.com", password: '123123123', rule: 'USER' },
+        { username: "Antonio", email: "antonio@a.com", password: '123123123', rule: 'USER' },
+        { username: "Meimei", email: "meimei@a.com", password: '123123123', rule: 'USER' },
+        { username: "Pedro", email: "pedro@a.com", password: '123123123', rule: 'USER' },
 
-        { username: "Lycan1", email: "lycan1@s.com", password: '123123123', rule: 'PM' },
-        { username: "Lycan2", email: "lycan2@s.com", password: '123123123', rule: 'PM' }
+        { username: "Otero", email: "otero@s.com", password: '123123123', rule: 'PM' },
+        { username: "Dick", email: "dick@s.com", password: '123123123', rule: 'PM' }
 
     ],
+
+    GENERAL: [
+        { name: 'Sven', birth: '902-12-08', popularity: '82', history: 'Middle', type: 'STR'},
+        { name: 'Zeus', birth: 'B.C. 2000', popularity: '61', history: 'Before', type: 'INT'}
+    ],
+
+
+
+
+
+
     Weapon: [
         { name: 'legion', w1: 'Glove',  w2:'helmet king', w3: 'Mangkey'},
         { name: 'tiny', w1: 'Septer',  w2:'windock', w3: 'Manta', w4: 'Dagger'}
