@@ -32,6 +32,16 @@ export const isAdmin = (req, res, next) => {
   User.findByPk(req.userId)
     .then(user => {
 
+      if(!user){
+        res.status(403).send(({
+          auth: false,
+          message: "Authentication fail"
+        }));
+        return false
+      }
+
+      console.log('___ user ___', user)
+
       if (user.dataValues.rule === "ADMIN") {
         next();
         return;
@@ -50,6 +60,14 @@ export const isPmOrAdmin = (req, res, next) => {
 
   User.findByPk(req.userId)
     .then(user => {
+
+      if(!user){
+        res.status(403).send(({
+          auth: false,
+          message: "Authentication fail"
+        }));
+        return false
+      }
 
       let rule = user.dataValues.rule
 

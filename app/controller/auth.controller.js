@@ -6,19 +6,30 @@ import * as config from '../config/env'
 import { InitialDB } from '../config/initial-db'
 
 const User = db.user;
+const Profile = db.profile;
+
 const Role = db.role;
 const Op = db.Sequelize.Op;
 
-export const init = (req, res) => {  
+export const init = (req, res) => {
 
-  InitialDB.AUTH.map((item)=>User.create({ 
-    username: item.username, 
-    email: item.email, 
-    password: bcrypt.hashSync(item.password, 8), 
-    rule: item.rule 
-  }))
- 
+  InitialDB.AUTH.map((item) => User.create({
+    username: item.username,
+    email: item.email,
+    password: bcrypt.hashSync(item.password, 8),
+    rule: item.rule
+  }).then(createdUser => {
+
+    return Profile.create({
+      firstName: createdUser.username
+    }).then(result => {
+      createdUser.setProfile(result)
+    })
+  })
+  )
+
   return res.status(200).send({ "success": true, "message": "DB INFO Created!" });
+
 
 }
 
