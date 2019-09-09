@@ -27,6 +27,8 @@
     "dotenv": "^8.0.0",
     "exceljs": "^1.11.0",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "fakerator": "^0.3.0",
     "fs": "0.0.1-security",
     "http": "^0.0.0",
     "json2csv": "^4.5.1",

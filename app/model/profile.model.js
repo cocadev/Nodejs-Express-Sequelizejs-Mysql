@@ -1,10 +1,11 @@
 export default (sequelize, Sequelize) => {
   const Profile = sequelize.define('profile', {
-    uuid: {
-			type: Sequelize.UUID,
-			defaultValue: Sequelize.UUIDV1,
-			primaryKey: true
-		},
+    // uuid: {
+		// 	type: Sequelize.UUID,
+		// 	defaultValue: Sequelize.UUIDV1,
+		// 	primaryKey: true
+    // },
+
     firstName: Sequelize.STRING,
     surName: Sequelize.STRING,
     image: Sequelize.STRING,

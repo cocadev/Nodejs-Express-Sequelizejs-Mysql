@@ -37,8 +37,7 @@ db.product = model_product(sequelize, Sequelize);
 db.project = model_project(sequelize, Sequelize);
 
 // relationship
-db.profile.hasOne(db.user, { foreignKey: 'fk_profileId', targetKey: 'uuid'});
-db.user.belongsTo(db.profile, { foreignKey: 'fk_profileId', targetKey: 'uuid'});
+db.user.hasOne(db.profile, { onDelete: 'CASCADE', hooks: true });
 
 db.address.belongsTo(db.customers, {foreignKey: 'fk_customerid', targetKey: 'uuid'});
 db.customers.hasOne(db.address, {foreignKey: 'fk_customerid', targetKey: 'uuid'});

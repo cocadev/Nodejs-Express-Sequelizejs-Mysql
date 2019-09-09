@@ -2,6 +2,9 @@ import db from '../config/db.js';
 import bcrypt from 'bcryptjs';
 import { InitialDB } from '../config/initial-db'
 
+var Fakerator = require("fakerator");
+var fakerator = Fakerator();
+
 const User = db.user;
 const Profile = db.profile;
 const General = db.generals;
@@ -17,19 +20,21 @@ export const init = (req, res) => {
     rule: item.rule
   }).then(createdUser => {
 
+    var randomUser = fakerator.entity.user()
+
     return Profile.create({
-      firstName: item.firstName,
-      surName: item.surName,
-      image: item.image,
-      location: item.location,
-      dateOfBirth: item.dateOfBirth,
-      placeOfBirth: item.placeOfBirth,
-      nationality: item.nationality,
-      maritalStatus: item.maritalStatus,
-      address: item.address,
-      phone: item.phone,
-      website: item.website,
-      job: item.job,
+      firstName: randomUser.firstName,
+      surName: randomUser.lastName,
+      image: randomUser.avatar,
+      location: randomUser.address.geo.latitude.toFixed(4) + ', ' + randomUser.address.geo.longitude.toFixed(4),
+      dateOfBirth: randomUser.dob.toString(),
+      placeOfBirth: randomUser.address.city,
+      nationality: randomUser.address.country,
+      maritalStatus: 'single',
+      address: randomUser.address.street,
+      phone: randomUser.phone,
+      website: randomUser.website,
+      job: randomUser.password,
     }).then(result => {
       createdUser.setProfile(result)
     })
